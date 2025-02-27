@@ -12,53 +12,14 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
             background: linear-gradient(to right, #00c6ff, #0072ff);
-        }
-
-        .sidebar {
-            background-color: #0072ff;
-            padding: 15px;
-            width: 250px;
-            height: 100vh;
-            position: fixed;
-            top: 0;
-            left: 0;
-            color: white;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .sidebar h2 {
-            color: #fff;
-            margin-bottom: 20px;
-            font-size: 20px;
-        }
-
-        .sidebar a {
-            color: #fff;
-            text-decoration: none;
-            padding: 10px;
-            margin: 5px 0;
-            background-color: #0051cc;
-            border-radius: 5px;
+            margin: 0;
+            padding: 20px;
             text-align: center;
         }
 
-        .sidebar a:hover {
-            background-color: #003c99;
-        }
-
-        .main-content {
-            margin-left: 250px;
-            padding: 20px;
-            width: 100%;
-        }
-
         .container {
-            max-width: 1300px;
+            max-width: 1407px;
             margin: auto;
             background: white;
             padding: 20px;
@@ -103,7 +64,6 @@
         .doc-card img {
             width: 100%;
             border-radius: 10px;
-            cursor: pointer;
         }
 
         .doc-card h3 {
@@ -143,28 +103,6 @@
             color: white;
             text-decoration: none;
         }
-
-        /* Lightbox Styles */
-        .lightbox {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: rgba(0, 0, 0, 0.8);
-            display: none;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .lightbox img {
-            max-width: 90%;
-            max-height: 90%;
-        }
-
-        .lightbox.active {
-            display: flex;
-        }
     </style>
 </head>
 
@@ -182,15 +120,18 @@
             <input type="text" id="search" placeholder="🔍 Tìm kiếm tài liệu..." onkeyup="filterDocs()">
             <div class="doc-list" id="docList">
                 <div class="doc-card">
-                    <canvas class="preview-img" data-src="https://phungbatam.github.io/Bruhh/Components/Documents/Math/class/Ten/bo-de-on-tap-kiem-tra-giua-hoc-ki-2-mon-toan-10-theo-cau-truc-moi.pdf" height="252" width="178"></canvas>
+                    <canvas class="preview-img"
+                        data-src="https://phungbatam.github.io/Bruhh/Components/Documents/Math/class/Ten/bo-de-on-tap-kiem-tra-giua-hoc-ki-2-mon-toan-10-theo-cau-truc-moi.pdf"
+                        height="252" width="178"></canvas>
                     <h3>bo-de-on-tap-kiem-tra-giua-hoc-ki-2-mon-toan-10-theo-cau-truc-moi</h3>
-                    <a href="https://phungbatam.github.io/Bruhh/Components/Documents/Math/class/bo-de-on-tap-kiem-tra-giua-hoc-ki-2-mon-toan-10-theo-cau-truc-moi.pdf" class="doc-link">Xem tài liệu</a>
+                    <a href="https://phungbatam.github.io/Bruhh/Components/Documents/Math/class/bo-de-on-tap-kiem-tra-giua-hoc-ki-2-mon-toan-10-theo-cau-truc-moi.pdf"
+                        class="doc-link">Xem tài liệu</a>
                 </div>
                 <div class="doc-card">
                     <h3>Tài liệu mẫu 2</h3>
                     <a href="path/to/document2.docx" class="doc-link">Xem tài liệu</a>
                 </div>
-    
+
             </div>
             <!-- Đoạn mã thêm vào hiển thị đường dẫn của .doc-card -->
             <div class="doc-paths" id="docPaths"></div>
@@ -203,189 +144,60 @@
         <canvas id="lightboxCanvas" style="max-width: 90%; max-height: 90%; display: none;"></canvas>
     </div> -->
 
-    <!-- <script src="./Math.js"></script> -->
+    <script src="./Math.js"></script>
     <script>
-        async function fetchDocumentsByClass(className) {
-            const directories = {
-                'Ten': "    class/Ten",
-                'Eleven': "class/Eleven",
-                'Twelve': "class/Twelve"
-            };
+        const documents = [
+            { title: "JavaScript Cơ Bản", image: "js.png", description: "Học JavaScript từ cơ bản đến nâng cao.", link: "" },
+            { title: "JavaScript Nâng Cao", image: "js_advanced.png", description: "Cách tối ưu mã JavaScript hiệu quả.", link: "docs/javascript_advanced.pdf" },
+            { title: "ES6+ Features", image: "es6.png", description: "Khám phá các tính năng mới trong ES6 và hơn thế nữa.", link: "docs/es6.pdf" },
+            { title: "Lập trình JavaScript với DOM", image: "dom.png", description: "Hướng dẫn thao tác DOM bằng JavaScript.", link: "docs/javascript_dom.pdf" },
 
-            const selectedClass = directories[className];
-            const allDocuments = [];
+        ];
 
-            try {
-                const response = await fetch(selectedClass);
-                const text = await response.text();
-
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(text, "text/html");
-                const links = Array.from(doc.querySelectorAll("a"))
-                    .map(a => a.href)
-                    .filter(href => href.endsWith(".pdf") || href.endsWith(".docx")); // Thêm điều kiện cho .docx
-
-                allDocuments.push(...links.map(file => ({
-                    title: formatTitle(file),
-                    file: file
-                })));
-            } catch (error) {
-                console.error(`Lỗi khi lấy danh sách file từ thư mục ${selectedClass}:`, error);
-            }
-
-            return allDocuments;
-        }
-
-        // Hàm format tiêu đề tài liệu
-        function formatTitle(filename) {
-            return decodeURIComponent(filename.split("/").pop().replace(".pdf", "").replace(/_/g, " "));
-        }
-
-        // Hàm load tài liệu theo lớp học
-        async function loadDocumentsForClass(className) {
-            const documents = await fetchDocumentsByClass(className);
-            window.allDocuments = documents;
-            window.currentClass = className;  // Cập nhật lớp học hiện tại
+        function loadDocuments() {
             const docList = document.getElementById("docList");
             docList.innerHTML = "";
 
             documents.forEach(doc => {
-                const docCard = createDocCard(doc);
+                const docCard = document.createElement("div");
+                docCard.className = "doc-card";
+
+                const image = document.createElement("img");
+                image.src = `images/${doc.image}`;
+                image.alt = doc.title;
+
+                const title = document.createElement("h3");
+                title.textContent = doc.title;
+
+                const description = document.createElement("p");
+                description.textContent = doc.description;
+
+                const link = document.createElement("a");
+                link.textContent = "📥 Tải xuống";
+                link.href = doc.link;
+                link.className = "download-btn";
+                link.setAttribute("download", doc.link);
+
+                docCard.appendChild(image);
+                docCard.appendChild(title);
+                docCard.appendChild(description);
+                docCard.appendChild(link);
                 docList.appendChild(docCard);
             });
-        }
-
-        // Hàm tạo thẻ tài liệu
-        function createDocCard(doc) {
-            const docCard = document.createElement("div");
-            docCard.className = "doc-card";
-
-            // Canvas để hiển thị ảnh preview
-            const canvas = document.createElement("canvas");
-            canvas.className = "preview-img";
-            canvas.setAttribute("data-src", doc.file);
-            canvas.onclick = () => openPreview(doc.file); // Mở ảnh khi nhấn
-
-            const title = document.createElement("h3");
-            title.textContent = doc.title;
-            title.onclick = () => openPreview(doc.file); // Thêm sự kiện click vào tên tài liệu để mở preview
-
-            const link = document.createElement("a");
-            link.textContent = "📥 Tải xuống";
-            link.href = doc.file;
-            link.className = "download-btn";
-            link.setAttribute("download", doc.file);
-
-            docCard.appendChild(canvas);
-            docCard.appendChild(title);
-            docCard.appendChild(link);
-
-            loadPreviewImage(canvas); // Gọi hàm render ảnh xem trước
-
-            return docCard;
-        }
-
-        // Hàm tải ảnh preview cho tài liệu
-        function loadPreviewImage(canvas, file) {
-            const observer = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const filePath = entry.target.getAttribute("data-src");
-
-                        // Kiểm tra nếu là .pdf hay .docx để xử lý khác nhau
-                        if (filePath.endsWith('.pdf')) {
-                            generatePreview(filePath, entry.target); // Render PDF vào canvas
-                        } else if (filePath.endsWith('.docx')) {
-                            // Hiển thị hình ảnh mặc định cho .docx từ URL mặc định
-                            const context = entry.target.getContext("2d");
-                            const img = new Image();
-                            img.onload = function () {
-                                context.drawImage(img, 0, 0, entry.target.width, entry.target.height);
-                            };
-                            img.src = 'https://w7.pngwing.com/pngs/854/300/png-transparent-microsoft-word-microsoft-office-2016-microsoft-excel-microsoft-template-blue-angle.png';  // Thay bằng URL của hình ảnh mặc định cho .docx
-                        }
-
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, { rootMargin: "100px" });
-
-            observer.observe(canvas);
-        }
-
-        // Hàm tạo preview ảnh từ file PDF
-        function generatePreview(pdfPath, canvasElement) {
-            pdfjsLib.getDocument(pdfPath).promise.then(pdf => {
-                pdf.getPage(1).then(page => {
-                    const viewport = page.getViewport({ scale: 0.3 });
-                    const context = canvasElement.getContext("2d");
-                    canvasElement.height = viewport.height;
-                    canvasElement.width = viewport.width;
-                    page.render({ canvasContext: context, viewport: viewport });
-                });
-            }).catch(error => {
-                console.error("Không thể tải bản xem trước PDF:", error);
-            });
-        }
-
-        // Hàm mở ảnh trong lightbox (phóng to ảnh PDF hoặc hình ảnh)
-        function openPreview(filePath) {
-            const lightbox = document.getElementById('lightbox');
-            const lightboxImage = document.getElementById('lightboxImage');
-            const lightboxCanvas = document.getElementById('lightboxCanvas'); // Canvas cho PDF
-
-            // Kiểm tra xem tài liệu là PDF hay là hình ảnh
-            if (filePath.endsWith('.pdf')) {
-                lightboxImage.style.display = 'none'; // Ẩn image nếu là PDF
-                lightboxCanvas.style.display = 'block'; // Hiển thị canvas nếu là PDF
-                generatePreview(filePath, lightboxCanvas); // Render PDF vào canvas
-            } else {
-                lightboxCanvas.style.display = 'none'; // Ẩn canvas nếu là ảnh
-                lightboxImage.style.display = 'block'; // Hiển thị image nếu là ảnh
-                lightboxImage.src = filePath; // Cập nhật src của ảnh
-            }
-
-            lightbox.classList.add('active'); // Hiển thị lightbox
-        }
-
-        function closeLightbox() {
-            const lightbox = document.getElementById('lightbox');
-            lightbox.classList.remove('active');
-        }
-
-        function delaySearch() {
-            clearTimeout(window.searchTimeout);
-            window.searchTimeout = setTimeout(filterDocs, 300);  // Delay tìm kiếm để tránh quá tải
         }
 
         function filterDocs() {
-            const searchQuery = document.getElementById("search").value.toLowerCase();
+            const query = document.getElementById("search").value.toLowerCase();
+            const items = document.querySelectorAll(".doc-card");
 
-            if (searchQuery.length === 0) {
-                loadDocumentsForClass(window.currentClass);  // Nếu không có từ khóa, load lại tất cả tài liệu
-                return;
-            }
-
-            const filteredDocs = window.allDocuments.filter(doc => doc.title.toLowerCase().includes(searchQuery));
-
-            const docList = document.getElementById("docList");
-            docList.innerHTML = ""; // Xóa danh sách cũ
-
-            filteredDocs.forEach(doc => {
-                const docCard = createDocCard(doc);
-                docList.appendChild(docCard);
+            items.forEach(item => {
+                const text = item.querySelector("h3").textContent.toLowerCase();
+                item.style.display = text.includes(query) ? "block" : "none";
             });
         }
 
-        // Hàm lọc tài liệu theo lớp học
-        function filterByClass(className) {
-            loadDocumentsForClass(className);  // Lọc tài liệu theo lớp học
-        }
-
-        // Gọi hàm load tài liệu cho lớp học mặc định khi trang tải
-        document.addEventListener("DOMContentLoaded", () => {
-            loadDocumentsForClass("Ten");  // Tải tài liệu lớp "Ten" mặc định
-        });
+        // Load tài liệu khi trang tải xong
+        document.addEventListener("DOMContentLoaded", loadDocuments);
 
     </script>
 </body>
