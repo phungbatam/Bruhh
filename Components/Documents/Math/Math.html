@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thư viện tài liệu Toán</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.12.313/pdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.4.2/mammoth.browser.min.js"></script>
+
+    <link rel="stylesheet" href="Math.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            background: linear-gradient(to right, #00c6ff, #0072ff);
+        }
+
+        .sidebar {
+            background-color: #0072ff;
+            padding: 15px;
+            width: 250px;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            color: white;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar h2 {
+            color: #fff;
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+
+        .sidebar a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px;
+            margin: 5px 0;
+            background-color: #0051cc;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .sidebar a:hover {
+            background-color: #003c99;
+        }
+
+        .main-content {
+            margin-left: 250px;
+            padding: 20px;
+            width: 100%;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        input {
+            width: 80%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 2px solid #0072ff;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .doc-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .doc-card {
+            width: 280px;
+            background: #fff;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: left;
+            transition: transform 0.3s ease;
+        }
+
+        .doc-card:hover {
+            transform: scale(1.05);
+        }
+
+        .doc-card img {
+            width: 100%;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .doc-card h3 {
+            margin: 10px 0;
+            font-size: 18px;
+        }
+
+        .doc-card p {
+            font-size: 14px;
+            color: #555;
+        }
+
+        .download-btn {
+            display: block;
+            text-align: center;
+            background: #0072ff;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 10px;
+        }
+
+        .download-btn:hover {
+            background: #0051cc;
+        }
+
+        .back-btn {
+            margin-top: 20px;
+            background: #ff4d4d;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .back-btn a {
+            color: white;
+            text-decoration: none;
+        }
+
+        /* Lightbox Styles */
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="sidebar">
+        <h2>Chọn Lớp</h2>
+        <a href="#" onclick="filterByClass('Ten')">Lớp 10</a>
+        <a href="#" onclick="filterByClass('Eleven')">Lớp 11</a>
+        <a href="#" onclick="filterByClass('Twelve')">Lớp 12</a>
+    </div>
+
+    <div class="main-content">
+        <div class="container">
+            <h1>📚 Thư viện tài liệu Toán</h1>
+            <input type="text" id="search" placeholder="🔍 Tìm kiếm tài liệu..." onkeyup="filterDocs()">
+            <div class="doc-list" id="docList"></div>
+            <button class="back-btn"><a href="../../../../index.html">🔙 Quay lại</a></button>
+        </div>
+    </div>
+
+    <!-- <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+        <img id="lightboxImage" src="" alt="Preview" style="max-width: 90%; max-height: 90%;" />
+        <canvas id="lightboxCanvas" style="max-width: 90%; max-height: 90%; display: none;"></canvas>
+    </div> -->
+
+    <script src="./Math.js"></script>
+</body>
+
+</html>

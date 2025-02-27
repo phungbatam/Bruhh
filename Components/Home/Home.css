@@ -1,0 +1,138 @@
+/* Selection highlight */
+::selection {
+    color: #ffffff;
+    background-color: orangered;
+}
+
+
+/* Layout wrapper */
+.home-layout {
+    display: flex;
+    gap: 20px;
+    max-width: 1300px;
+    width: 95%;
+    margin: auto;
+    padding: 20px;
+}
+
+/* Main content area */
+.markdown-feed {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    flex: 3; /* Takes 3/4 of space */
+    max-width: 1100px;
+    width: 100%;
+}
+
+/* Markdown card */
+.markdown-card {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    border-left: 5px solid #007bff;
+    transition: transform 0.2s ease-in-out;
+}
+
+/* Hover effect */
+@media (hover: hover) {
+    .markdown-card:hover {
+        transform: translateY(-5px);
+    }
+}
+
+/* Sidebar */
+.sidebar {
+    flex: 1; /* Takes 1/4 of space */
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-left: auto; /* Push sidebar to the right */
+}
+
+/* Sidebar title */
+.sidebar h3 {
+    margin-top: 0;
+    font-size: 20px;
+    color: #007bff;
+}
+
+/* Article list */
+.article-list {
+    list-style: none;
+    padding: 0;
+}
+
+.article-list li {
+    margin: 10px 0;
+}
+
+.article-list a {
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+    transition: color 0.2s;
+}
+
+.article-list a:hover {
+    color: #007bff;
+}
+
+/* Markdown title */
+.markdown-title {
+    margin: 0;
+    font-size: 24px;
+    color: #007bff;
+}
+
+/* Markdown content */
+.markdown-content {
+    margin-top: 10px;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .home-layout {
+        flex-direction: column;
+        width: 90%;
+    }
+
+    .markdown-feed {
+        width: 100%;
+    }
+
+    .sidebar {
+        width: 100%;
+    }
+}
+
+@media (max-width: 600px) {
+    .markdown-feed {
+        width: 95%;
+        padding: 10px;
+    }
+
+    .markdown-card {
+        padding: 15px;
+        border-left-width: 3px;
+    }
+
+    .markdown-title {
+        font-size: 20px;
+    }
+
+    .markdown-content {
+        font-size: 14px;
+    }
+}
+
+@media (min-width: 1400px) {
+    .home-layout {
+        max-width: 1400px;
+        width: 90%;
+    }
+}

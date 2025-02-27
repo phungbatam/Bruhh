@@ -1,0 +1,117 @@
+::-webkit-scrollbar {
+    height: 5px;
+    width: 5px;
+}
+
+::-webkit-scrollbar-track:hover {
+    background-color: #B8C0C2;
+}
+
+::-webkit-scrollbar-thumb {
+    /* border-radius: 5px; */
+    background-color: #397524;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #62A34B;
+}
+
+::-webkit-scrollbar-thumb:active {
+    background-color: #62A34B;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Navigation Bar */
+.navbar {
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #007bff;
+    padding: 10px 20px;
+    color: white;
+    border-radius: 2px;
+    z-index: 99999;
+}
+
+/* Logo */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo img {
+    width: 40px;
+    /* Adjust size */
+    height: auto;
+}
+
+.logo span {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* Menu */
+.menu {
+    display: flex;
+    gap: 15px;
+}
+
+.btn {
+    background: white;
+    color: #007bff;
+    border: none;
+    padding: 8px 15px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background: #0056b3;
+    color: white;
+}
+
+/* Toggle button for mobile */
+.menu-toggle {
+    display: none;
+    font-size: 24px;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .menu {
+        display: none;      
+        flex-direction: column;
+        background: #007bff;
+        position: absolute;
+        top: 60px;
+        right: 10px;
+        width: 150px;
+        border-radius: 8px;
+        padding: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .menu.active {
+        display: flex;
+        height: 100vh;
+        width: 30vh;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+}

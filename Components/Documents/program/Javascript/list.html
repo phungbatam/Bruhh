@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh sách tài liệu JavaScript</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #00c6ff, #0072ff);
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 1407px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        input {
+            width: 80%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 2px solid #0072ff;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .doc-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .doc-card {
+            width: 280px;
+            background: #fff;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: left;
+            transition: transform 0.3s ease;
+        }
+
+        .doc-card:hover {
+            transform: scale(1.05);
+        }
+
+        .doc-card img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .doc-card h3 {
+            margin: 10px 0;
+            font-size: 18px;
+        }
+
+        .doc-card p {
+            font-size: 14px;
+            color: #555;
+        }
+
+        .download-btn {
+            display: block;
+            text-align: center;
+            background: #0072ff;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 10px;
+        }
+
+        .download-btn:hover {
+            background: #0051cc;
+        }
+
+        .back-btn {
+            margin-top: 20px;
+            background: #ff4d4d;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .back-btn a {
+            color: white;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>📚 Danh sách tài liệu JavaScript</h1>
+        <input type="text" id="search" placeholder="🔍 Tìm kiếm tài liệu..." onkeyup="filterDocs()">
+
+        <div class="doc-list" id="docList">
+            <!-- Tài liệu sẽ được thêm vào bằng JavaScript -->
+        </div>
+
+        <button class="back-btn"><a href="../../../../index.html">🔙 Quay lại</a></button>
+    </div>
+
+    <script src="./search.js"></script>
+</body>
+
+</html>

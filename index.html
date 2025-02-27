@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Education Platform</title>
+    <link rel="stylesheet" href="./assets/styles.css">
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://apis.example.com; style-src 'self' https://fonts.googleapis.com;"> -->
+
+    <script>
+        document.addEventListener('contextmenu', function (event) {
+            event.preventDefault();
+        });
+
+        document.addEventListener('mousedown', function (event) {
+            if (event.button === 2) {
+                event.preventDefault();
+            }
+        });
+
+        document.addEventListener('copy', function (event) {
+            event.preventDefault();
+            alert("Copying content is disabled!");
+        });
+
+    </script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #0d171c;
+        }
+
+        #app {
+            padding: 20px;
+        }
+
+        nav {
+            background: #007bff;
+            padding: 10px;
+            color: white;
+        }
+
+        .container {
+            padding: 20px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            background: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+    <!-- Thư viện highlight.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.3.0/marked.min.js"></script>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.2.0/github-markdown.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github-dark.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <script defer src="./define/utils.js"></script>
+    <script defer src="./define/render.js"></script>
+    <script defer src="./define/routes.js"></script>
+    <!-- Home -->
+    <script defer src="./Components/Home/Home.js"></script>
+    <!-- <link rel="stylesheet" href="./Components/Home/Home.css"> -->
+
+    <!-- Course -->
+    <script src="./Components/Course/Courses.js"></script>
+
+    <!-- Documents -->
+    <script src="./Components/Documents/Documents.js"></script>
+
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <img src="./assets/image/icon.jfif" alt="Super Coder Logo">
+            <span>Education</span>
+        </div>
+        <div class="menu">
+            <button class="btn" onclick="navigate('Home'); closeMenu()">Home</button>
+            <button class="btn" onclick="navigate('Courses'); closeMenu()">Courses</button>
+            <button class="btn" onclick="navigate('Documents'); closeMenu()">Docx</button>
+            <button class="btn" onclick="navigate('About'); closeMenu()">About</button>
+        </div>
+        <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+    </nav>
+
+    <style>
+
+        #right-click-menu {
+            display: none;
+            position: absolute;
+            background-color: white;
+            border: 1px solid #ccc;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            width: 200px;
+        }
+
+        #right-click-menu ul {
+            list-style-type: none;
+            padding: 10px;
+            margin: 0;
+        }
+
+        #right-click-menu ul li {
+            padding: 8px;
+            cursor: pointer;
+        }
+
+        #right-click-menu ul li:hover {
+            background-color: #007bff;
+            color: white;
+        }
+
+        #right-click-menu ul li+li {
+            border-top: 1px solid #f0f0f0;
+        }
+
+        #app {
+            padding: 20px;
+        }
+    </style>
+    <div id="right-click-menu">
+        <ul>
+            <li onclick="alert('Chức năng này đang được xây dựng')">Option 1</li>
+            <!-- <li onclick="alert('Option 2 clicked')">Option 2</li>
+            <li onclick="alert('Option 3 clicked')">Option 3</li>
+            <li onclick="alert('Option 4 clicked')">Option 4</li> -->
+        </ul>
+    </div>
+
+    <script>
+        const rightClickMenu = document.getElementById("right-click-menu");
+
+        document.addEventListener('contextmenu', function (event) {
+            event.preventDefault(); 
+
+            rightClickMenu.style.left = `${event.pageX}px`;
+            rightClickMenu.style.top = `${event.pageY}px`;
+
+            rightClickMenu.style.display = 'block';
+        });
+
+        document.addEventListener('click', function () {
+            rightClickMenu.style.display = 'none';
+        });
+    </script>
+    <script src="./assets/script.js"></script>
+    <div id="app"></div>
+</body>
+
+</html>
