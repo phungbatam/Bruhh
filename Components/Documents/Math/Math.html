@@ -180,52 +180,23 @@
         <div class="container">
             <h1>📚 Thư viện tài liệu Toán</h1>
             <input type="text" id="search" placeholder="🔍 Tìm kiếm tài liệu..." onkeyup="filterDocs()">
-            <div class="doc-list" id="docList"></div>
+            <div class="doc-list" id="docList">
+                <div class="doc-card">
+                    <canvas class="preview-img" data-src="https://phungbatam.github.io/Bruhh/Components/Documents/Math/class/Ten/bo-de-on-tap-kiem-tra-giua-hoc-ki-2-mon-toan-10-theo-cau-truc-moi.pdf" height="252" width="178"></canvas>
+                    <h3>bo-de-on-tap-kiem-tra-giua-hoc-ki-2-mon-toan-10-theo-cau-truc-moi</h3>
+                    <a href="https://phungbatam.github.io/Bruhh/Components/Documents/Math/class/bo-de-on-tap-kiem-tra-giua-hoc-ki-2-mon-toan-10-theo-cau-truc-moi.pdf" class="doc-link">Xem tài liệu</a>
+                </div>
+                <div class="doc-card">
+                    <h3>Tài liệu mẫu 2</h3>
+                    <a href="path/to/document2.docx" class="doc-link">Xem tài liệu</a>
+                </div>
+    
+            </div>
             <!-- Đoạn mã thêm vào hiển thị đường dẫn của .doc-card -->
             <div class="doc-paths" id="docPaths"></div>
             <button class="back-btn"><a href="https://phungbatam.github.io/Bruhh">🔙 Quay lại</a></button>
         </div>
     </div>
-
-    <script>
-        // Giả sử bạn đã có danh sách tài liệu, mỗi tài liệu có thuộc tính 'path' cho đường dẫn
-        const docs = [
-            { name: "Lớp 10 Toán", path: "/documents/class10/doc1.docx" },
-            { name: "Lớp 11 Toán", path: "/documents/class11/doc2.docx" },
-            { name: "Lớp 12 Toán", path: "/documents/class12/doc3.docx" }
-        ];
-
-        // Hàm hiển thị các tài liệu trong .doc-list và hiển thị đường dẫn
-        function displayDocs() {
-            const docList = document.getElementById("docList");
-            const docPaths = document.getElementById("docPaths");
-
-            // Xóa các phần tử cũ trước khi hiển thị mới
-            docList.innerHTML = '';
-            docPaths.innerHTML = '';
-
-            docs.forEach(doc => {
-                // Tạo thẻ div cho mỗi tài liệu và thêm vào docList
-                const docCard = document.createElement('div');
-                docCard.classList.add('doc-card');
-                docCard.innerHTML = `
-            <h3>${doc.name}</h3>
-            <a href="${doc.path}" target="_blank">Xem tài liệu</a>
-        `;
-                docList.appendChild(docCard);
-
-                // Tạo thẻ div cho đường dẫn tài liệu và thêm vào docPaths
-                const docPath = document.createElement('div');
-                docPath.classList.add('doc-path');
-                docPath.innerText = `Đường dẫn: ${doc.path}`;
-                docPaths.appendChild(docPath);
-            });
-        }
-
-        // Gọi hàm displayDocs khi trang được tải
-        window.onload = displayDocs;
-
-    </script>
 
     <!-- <div id="lightbox" class="lightbox" onclick="closeLightbox()">
         <img id="lightboxImage" src="" alt="Preview" style="max-width: 90%; max-height: 90%;" />
